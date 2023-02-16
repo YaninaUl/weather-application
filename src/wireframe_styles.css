@@ -5,6 +5,7 @@ h2 {
 h2,
 h4,
 h5,
+li,
 #current-date,
 .footer {
   color: #5a6275;
@@ -19,6 +20,9 @@ h5 {
 }
 a {
   text-decoration: none;
+}
+li {
+  list-style: none;
 }
 #current-location-button {
   width: 30%;
@@ -65,6 +69,8 @@ a {
   font-size: 18px;
   text-decoration: none;
   color: blue;
+  position: relative;
+  top: -28px;
 }
 .footer {
   margin-left: 330px;
