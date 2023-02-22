@@ -123,6 +123,13 @@ function showActualParameters(response) {
   let windParameter = document.querySelector("#wind");
   windParameter.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
 }
+function displayDefaultCityParam(city) {
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = city;
+  let apiKey = "32af3cb3257ed5619525cccb786ab31a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showActualParameters);
+}
 
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
@@ -148,6 +155,8 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 let celsiusLink = document.querySelector(".celsius");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+displayDefaultCityParam("Minsk");
 
 //
 //
