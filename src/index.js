@@ -56,15 +56,17 @@ let days = [
 ];
 let day = days[dayNumber];
 let hours = now.getHours();
+if (hours < 10) {
+  hours = `0${hours}`;
+}
 let minutes = now.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
 let currentDate = document.querySelector("#current-date");
 
 function showDayAndTime(day, hours, minutes) {
-  if (minutes < 10) {
-    currentDate.innerHTML = `${day} ${hours}:0${minutes}`;
-  } else {
-    currentDate.innerHTML = `${day} ${hours}:${minutes}`;
-  }
+  currentDate.innerHTML = `${day} ${hours}:${minutes}`;
 }
 showDayAndTime(day, hours, minutes);
 
@@ -78,26 +80,6 @@ function showSearchedCity(event) {
 
 let searchTrigger = document.querySelector("#search-button");
 searchTrigger.addEventListener("click", showSearchedCity);
-
-/*let degreesC = 17;
-function fahrenheitCalculation(event) {
-  event.preventDefault();
-  let tempF = Math.round((degreesC * 9) / 5 + 32);
-  let degree = document.querySelector("#degree");
-  degree.innerHTML = tempF;
-}
-
-function celsiusCalculation(event) {
-  event.preventDefault();
-  let degree = document.querySelector("#degree");
-  degree.innerHTML = degreesC;
-}
-
-let fahrenheitMeasure = document.querySelector(".fahrenheit");
-fahrenheitMeasure.addEventListener("click", fahrenheitCalculation);
-
-let celsiusMeasure = document.querySelector(".celsius");
-celsiusMeasure.addEventListener("click", celsiusCalculation);*/
 
 //current weather for searched city
 function showTemperature(event) {
@@ -125,8 +107,9 @@ function showActualParameters(response) {
     `http://openweathermap.org/img/wn/${iconCode}@2x.png`
   );
 
-  let currentDegree = document.querySelector("#degree");
-  currentDegree.innerHTML = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector("#degree");
+  celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
   let currentDegreeDay = document.querySelector(".chosen-weather h5");
   currentDegreeDay.innerHTML = ` ${Math.round(response.data.main.temp)} ℃`;
@@ -141,8 +124,34 @@ function showActualParameters(response) {
   windParameter.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
 }
 
-//temperature for current location
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#degree");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let tempFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
+  temperatureElement.innerHTML = tempFahrenheit;
+}
 
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  temperatureElement = document.querySelector("#degree");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let fahrenheitLink = document.querySelector(".fahrenheit");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector(".celsius");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+//
+//
+//temperature for current location
 function showGeolocation(position) {
   console.log(position);
   let lat = position.coords.latitude;
@@ -164,9 +173,6 @@ function showCurrentCity(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showGeolocation);
 }
-/*function showCurrentCity() {
-  navigator.geolocation.getCurrentPosition(showGeolocation);
-}
-showCurrentCity();*/
+
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", showCurrentCity);

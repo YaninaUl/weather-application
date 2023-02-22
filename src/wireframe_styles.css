@@ -80,6 +80,12 @@ li::first-letter {
   position: relative;
   top: -28px;
 }
+.active {
+  color: black;
+}
+.active:hover {
+  cursor: default;
+}
 .footer {
   margin-left: 330px;
 }
