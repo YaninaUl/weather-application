@@ -113,6 +113,18 @@ searchTrigger.addEventListener("click", showTemperature);
 function showActualParameters(response) {
   console.log(response);
 
+  let mainIconElement = document.querySelector("#main-icon");
+  let iconCode = response.data.weather[0].icon;
+  mainIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+  );
+  let currentDayIconElement = document.querySelector(".chosen-weather img");
+  currentDayIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+  );
+
   let currentDegree = document.querySelector("#degree");
   currentDegree.innerHTML = Math.round(response.data.main.temp);
 
@@ -120,7 +132,7 @@ function showActualParameters(response) {
   currentDegreeDay.innerHTML = ` ${Math.round(response.data.main.temp)} ℃`;
 
   let weatherDescription = document.querySelector("#weather-description");
-  weatherDescription.innerHTML = `${response.data.weather[0].main}`;
+  weatherDescription.innerHTML = `${response.data.weather[0].description}`;
 
   let humidityParameter = document.querySelector("#humidity");
   humidityParameter.innerHTML = `Humidity: ${response.data.main.humidity}%`;
@@ -152,6 +164,9 @@ function showCurrentCity(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showGeolocation);
 }
-
+/*function showCurrentCity() {
+  navigator.geolocation.getCurrentPosition(showGeolocation);
+}
+showCurrentCity();*/
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", showCurrentCity);
