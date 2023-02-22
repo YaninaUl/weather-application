@@ -122,7 +122,11 @@ function showActualParameters(response) {
 
   let windParameter = document.querySelector("#wind");
   windParameter.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
+
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
+
 function displayDefaultCityParam(city) {
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = city;
@@ -156,7 +160,7 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let celsiusLink = document.querySelector(".celsius");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-displayDefaultCityParam("Minsk");
+displayDefaultCityParam("Warsaw");
 
 //
 //
