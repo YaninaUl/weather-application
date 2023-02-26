@@ -52,6 +52,11 @@ li::first-letter {
   border: 5px solid #5a6275;
   padding-left: 40px;
   padding-right: 30px;
+  background: linear-gradient(
+    178deg,
+    rgba(201, 234, 252, 0.51) 14.9%,
+    rgba(139, 192, 216, 0.73) 80%
+  );
 }
 
 #search-input {
@@ -62,7 +67,8 @@ li::first-letter {
   height: 70px;
 }
 
-.daily-forecast {
+.daily-forecast,
+.weather-forecast-temp {
   border-width: 5px;
   border-radius: 10%;
   text-align: center;
@@ -70,6 +76,14 @@ li::first-letter {
 }
 .daily-forecast img {
   height: 60px;
+}
+.weather-forecast-temp {
+  color: #202124;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+.weather-forecast-temp-min {
+  color: #70757a;
 }
 .chosen-weather {
   border: 1px solid grey;
