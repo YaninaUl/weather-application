@@ -101,18 +101,18 @@ function showActualParameters(response) {
     "src",
     `http://openweathermap.org/img/wn/${iconCode}@2x.png`
   );
-  let currentDayIconElement = document.querySelector(".chosen-weather img");
+  /*let currentDayIconElement = document.querySelector(".chosen-weather img");
   currentDayIconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${iconCode}@2x.png`
-  );
+  );*/
 
   let temperatureElement = document.querySelector("#degree");
   celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
-  let currentDegreeDay = document.querySelector(".chosen-weather h5");
-  currentDegreeDay.innerHTML = ` ${Math.round(response.data.main.temp)} ℃`;
+  /*let currentDegreeDay = document.querySelector(".chosen-weather h5");
+  currentDegreeDay.innerHTML = ` ${Math.round(response.data.main.temp)} ℃`;*/
 
   let weatherDescription = document.querySelector("#weather-description");
   weatherDescription.innerHTML = `${response.data.weather[0].description}`;
@@ -189,3 +189,33 @@ function showCurrentCity(event) {
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", showCurrentCity);
+
+//forecast
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHtml = ``;
+  forecastHtml = `<div class="row">`;
+
+  let days = ["Sun", "Mon", "Tue"];
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+            <div class="col-2">
+              <div>
+                <h5>${day}</h5>
+                <div class="daily-forecast">
+                  <img src="images/snow_light.png"/>
+                </div>
+              <div class="weather-forecast-temp">  
+                <span class="weather-forecast-temp-max"> 18°</span> 
+                <span class="weather-forecast-temp-min">12°</span>
+              </div>
+              </div>
+              </div>`;
+  });
+  forecastHtml = forecastHtml + `</div>`;
+  forecastElement.innerHTML = forecastHtml;
+}
+
+showForecast();
