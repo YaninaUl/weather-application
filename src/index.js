@@ -125,6 +125,8 @@ function showActualParameters(response) {
 
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
+
+  getForecast(response.data.coord);
 }
 
 function displayDefaultCityParam(city) {
@@ -191,7 +193,8 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", showCurrentCity);
 
 //forecast
-function showForecast() {
+function showForecast(response) {
+  // console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHtml = ``;
   forecastHtml = `<div class="row">`;
@@ -207,15 +210,19 @@ function showForecast() {
                 <div class="daily-forecast">
                   <img src="images/snow_light.png"/>
                 </div>
-              <div class="weather-forecast-temp">  
-                <span class="weather-forecast-temp-max"> 18°</span> 
-                <span class="weather-forecast-temp-min">12°</span>
+                <div class="weather-forecast-temp">  
+                  <span class="weather-forecast-temp-max"> 18°</span> 
+                  <span class="weather-forecast-temp-min">12°</span>
+                </div>
               </div>
-              </div>
-              </div>`;
+            </div>`;
   });
   forecastHtml = forecastHtml + `</div>`;
   forecastElement.innerHTML = forecastHtml;
 }
 
-showForecast();
+function getForecast(coordinates) {
+  let apiKey = "32af3cb3257ed5619525cccb786ab31a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+}
