@@ -67,14 +67,20 @@ li::first-letter {
   height: 70px;
 }
 
-.daily-forecast,
-.weather-forecast-temp {
+.other-param {
+  text-align: left;
+}
+.today-forecast {
   border-width: 5px;
   border-radius: 10%;
+}
+
+#forecast {
+  margin-bottom: 20px;
   text-align: center;
   display: block;
 }
-.daily-forecast img {
+.forecast-icon img {
   height: 60px;
 }
 .weather-forecast-temp {
